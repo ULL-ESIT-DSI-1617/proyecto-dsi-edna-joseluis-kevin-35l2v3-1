@@ -1,9 +1,8 @@
 "use strict";
 
-var express = require('express');
-var app = express();
-// var bodyParser = require('body-parser');
-var path = require('path');
+var express = require('express'),
+	app = express(),
+	path = require('path');
 
 app.set('port', (process.env.PORT || 8080));
 
