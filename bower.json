@@ -1,0 +1,30 @@
+{
+  "name": "proyecto-dsi-edna-joseluis-kevin-35l2v3-1",
+  "description": "Calculadora que hace operaciones binarias simples.",
+  "main": "index.js",
+  "authors": [
+    "Edna Liliana Galino Camacho",
+    "José Luis Doblado González",
+    "Kevin Estévez Expósito"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "calculadora",
+    "javascript",
+    "node",
+    "express"
+  ],
+  "homepage": "https://github.com/ULL-ESIT-DSI-1617/proyecto-dsi-edna-joseluis-kevin-35l2v3-1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ull-edna-joseluis-kevin-35l2-ull-operation": "*",
+    "ull-edna-joseluis-kevin-35l2-ull-operation-resta": "*",
+    "ull-edna-joseluis-kevin-35l2-ull-operation-suma": "*"
+  }
+}
