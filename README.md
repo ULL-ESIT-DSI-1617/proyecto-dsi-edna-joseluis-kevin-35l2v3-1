@@ -2,6 +2,10 @@
 
 Calculadora escrita en JavaScript que resuelve operaciones binarias simples.
 
+## Módulo Principal
+
+[Operation](https://github.com/ULL-ESIT-DSI-1617/proyecto-dsi-edna-joseluis-kevin-35l2v3-1-operation)
+
 ## Operaciones disponibles
 
 [Suma](https://github.com/ULL-ESIT-DSI-1617/proyecto-dsi-edna-joseluis-kevin-35l2v3-1-operation-suma)
