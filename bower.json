@@ -25,6 +25,8 @@
   "dependencies": {
     "ull-edna-joseluis-kevin-35l2-ull-operation": "*",
     "ull-edna-joseluis-kevin-35l2-ull-operation-resta": "*",
-    "ull-edna-joseluis-kevin-35l2-ull-operation-suma": "*"
+    "ull-edna-joseluis-kevin-35l2-ull-operation-suma": "*",
+    "ull-edna-joseluis-kevin-35l2-ull-operation-mult": "*",
+    "ull-edna-joseluis-kevin-35l2-ull-operation-div": "*"
   }
 }
