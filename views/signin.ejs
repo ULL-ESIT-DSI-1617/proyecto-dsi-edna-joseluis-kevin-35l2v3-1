@@ -27,24 +27,27 @@
 					<div class="row">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-4">
-							<form class="text-left">
+							<form class="text-left" action="/signin" method="post">
 								<div class="form-group">
 									<label for="username">Nombre de usuario</label>
-									<input type="text" class="form-control" id="username" placeholder="Usuario">
+									<input type="text" class="form-control" id="username" placeholder="Usuario" name="username">
 								</div>
 								<div class="form-group">
 									<label for="passwd">Contraseña</label>
-									<input type="password" class="form-control" id="passwd" placeholder="Contraseña">
+									<input type="password" class="form-control" id="passwd" placeholder="Contraseña" name="passwd">
 								</div>
 								<div class="form-check">
 									<label class="form-check-label">
-										<input type="checkbox" class="form-check-input"> Recordar credenciales
+										<input type="checkbox" class="form-check-input" id="check" name="check"> Recordar usuario
 									</label>
 								</div>
-								<button type="submit" class="btn btn-primary" aria-describedby="signinHelp">Iniciar sesión</button>
-								<p><small id="signinHelp" class="form-text text-muted"><a href="signout">Regístrate si aún no tienes una cuenta</a></small></p>
+								<button type="submit" class="btn btn-primary" aria-describedby="signinHelp" onclick="if (check.checked == true) storeUser();">Iniciar sesión</button>
+								<p><small id="signinHelp" class="form-text text-muted"><a href="/signout">(Regístrate si aún no tienes una cuenta)</a></small></p>
 							</form>
-							<br>
+							<form class="text-left">
+                                <button type="submit" class="btn btn-danger text-left" onclick="clearLocalStorage();">Eliminar almacenamiento local</button>
+                                <p><small id="removeLocStorHelp" class="form-text text-muted">(Deja de recordar tu usuario)</small></p>
+                            </form>
 							<div class="row">
 								<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
 							</div>
@@ -65,5 +68,13 @@
 			</div>
 		</div>
 		<br>
+        <script src="js/remember.js"></script>
+        <script>
+            window.onload = function() {
+                if (window.localStorage && localStorage.getItem("username")) {
+                    username.value = localStorage.getItem("username");
+                }
+            }
+        </script>
 
 		<% include foot %>

@@ -23,22 +23,19 @@
 					</div>
 					<br>
 					<div class="row">
-						<div class="row">
+						<form action="/jscalculator" method="post">
 							<div class="col-sm-3"></div>
 							<div class="col-sm-6">
-								<label for="original">Introduzca una operación (por ejemplo 2+3):</label>
-								<input type="text" class="form-control text-center" onchange="main();" id="original" placeholder="2+3">
-							</div>
-							<div class="col-sm-3"></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3"></div>
-							<div class="col-sm-6">
-								<label for="operated">Resultado:</label>
-								<span class="output text-center" id="operated"></span>
-							</div>
-							<div class="col-sm-3"></div>
-						</div>
+								<label for="original">Introduzca una operación (por ejemplo 2+3): </label>
+								<input type="text" class="form-control text-center" id="original" name="original" placeholder="2+3" autofocus>
+                                <br>
+                                <button type="submit" class="btn btn-primary" onclick="main();">Resolver</button>
+                                <label for="operated">Resultado:</label>
+                                <span class="output text-center" id="operated" name="operated"></span>
+                                <input type="hidden" id="result" name="result">
+                                </div>
+                                <div class="col-sm-3"></div>
+                        </form>
 					</div>
 					<br>
 					<div class="row">
@@ -65,11 +62,11 @@
 			</div>
 		</div>
 		<br>
-        <script src="bower_components/ull-edna-joseluis-kevin-35l2-ull-operation/operation.js"></script>
-        <script src="bower_components/ull-edna-joseluis-kevin-35l2-ull-operation-suma/suma.js"></script>
-        <script src="bower_components/ull-edna-joseluis-kevin-35l2-ull-operation-resta/resta.js"></script>
-        <script src="bower_components/ull-edna-joseluis-kevin-35l2-ull-operation-mult/multiplicacion.js"></script>
-        <script src="bower_components/ull-edna-joseluis-kevin-35l2-ull-operation-div/division.js"></script>
+        <script src="ull-edna-joseluis-kevin-35l2-ull-operation/operation.js"></script>
+        <script src="ull-edna-joseluis-kevin-35l2-ull-operation-suma/suma.js"></script>
+        <script src="ull-edna-joseluis-kevin-35l2-ull-operation-resta/resta.js"></script>
+        <script src="ull-edna-joseluis-kevin-35l2-ull-operation-mult/multiplicacion.js"></script>
+        <script src="ull-edna-joseluis-kevin-35l2-ull-operation-div/division.js"></script>
         <script src="js/main.js"></script>
 
 		<% include foot %>

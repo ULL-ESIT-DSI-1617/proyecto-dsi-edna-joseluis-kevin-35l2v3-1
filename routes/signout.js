@@ -7,4 +7,8 @@ router.get('/', function(req, res) {
 	res.render('signout');
 });
 
+router.post('/', function(req, res) {
+	// Comprobar registro de nuevo usuario...
+});
+
 module.exports = router;
