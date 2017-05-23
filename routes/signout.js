@@ -38,8 +38,17 @@ router.post('/', function(req, res) {
 							console.log(input);
 						}
 					});
+					console.log("Registrado correctamente");
+			res.render('signin');
+				}
+				if(result){
+					console.log(result);
+					console.log('Username ya Registrado!');
+					res.send('Username ya Registrado!')
 				}
 			});
+		}else{
+			res.send("Las contraseñas no coinciden");
 		}
 	}
 });
