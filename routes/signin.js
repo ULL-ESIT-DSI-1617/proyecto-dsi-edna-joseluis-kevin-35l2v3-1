@@ -7,6 +7,7 @@ var router = express.Router();
 var configDB = require('../config/database');
 mongoose.connect(configDB.url);
 var User = require('../models/user');
+var mongoose = require('mongoose');
 
 router.get('/', function(req, res) {
 	res.render('signin');
@@ -19,10 +20,15 @@ router.post('/', function(req, res) {
 		console.log('No has introducido tus datos!');
 
 	}else{
-							//Buscamos en la base de datos
-				});
-			}
-		});
+			User.findOne({username:req.body.username, password : req.body.passwd}, function (err, result){
+					if(result !== null){
+							console.log('Login correcto!');
+							res.render('jscalculator');
+						}else{
+
+						});
+					}
+			});
 	}
 
 
