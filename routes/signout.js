@@ -15,6 +15,14 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
 	// Comprobar registro de nuevo usuario...
+	
+		
+	if(!req.body.username || !req.body.passwd1 || !req.body.passwd2){	//Comprobar si los campos están vacíos
+		
+		console.log('No has introducido todos los datos!');
+		res.send('No has introducido todos los datos!');
+		
+	}
 });
 
 module.exports = router;
