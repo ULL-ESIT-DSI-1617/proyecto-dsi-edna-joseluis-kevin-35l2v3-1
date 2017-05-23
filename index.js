@@ -5,6 +5,12 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	path = require('path');
 
+var mongoose = require('mongoose');
+
+//conectandonos a la base de datos
+var configDB = require('./config/database.js');
+mongoose.connect(configDB.url);
+
 app.set('port', (process.env.PORT || 8080));
 
 app.use(express.static(__dirname + '/static/'));

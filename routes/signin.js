@@ -29,7 +29,7 @@ router.post('/', function(req, res) {
 									if(result == null){
 										alert("No existe el usuario");
 									}else{
-										//En el caso de que la contraseña esté incorrecta
+										alert("Contraseña Incorrecta");
 									}
 						});
 					}
