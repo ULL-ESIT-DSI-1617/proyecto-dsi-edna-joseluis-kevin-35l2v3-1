@@ -25,7 +25,12 @@ router.post('/', function(req, res) {
 							console.log('Login correcto!');
 							res.render('jscalculator');
 						}else{
-
+							User.findOne({username:req.body.username}, function (err, result){
+									if(result == null){
+										alert("No existe el usuario");
+									}else{
+										//En el caso de que la contraseña esté incorrecta
+									}
 						});
 					}
 			});
