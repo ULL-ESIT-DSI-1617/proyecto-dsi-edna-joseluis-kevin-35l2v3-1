@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
 var configDB = require('../config/database');
@@ -27,10 +28,13 @@ router.post('/', function(req, res) {
 			User.findOne({username:req.body.username}, function (err, result){
 				if(result == null){
 					//Poner el codigo para insertar usuario en la base de datos
+
 					var input = new User({
 						username: req.body.username,
-						password: req.body.passwd1
+						password: bcrypt.hashSync(req.body.passwd1),
 					});
+
+					// Guardamos en la base de datos
 					input.save(function(err){
 						if(err){
 							console.log('ERROR');
@@ -39,7 +43,7 @@ router.post('/', function(req, res) {
 						}
 					});
 					console.log("Registrado correctamente");
-			res.render('signin');
+			res.render('jscalculator');
 				}
 				if(result){
 					console.log(result);
