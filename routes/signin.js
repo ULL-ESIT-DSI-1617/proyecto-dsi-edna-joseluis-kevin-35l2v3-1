@@ -27,9 +27,9 @@ router.post('/', function(req, res) {
 						}else{
 							User.findOne({username:req.body.username}, function (err, result){
 									if(result == null){
-										alert("No existe el usuario");
+										
 									}else{
-										// alert("Contraseña Incorrecta");
+										
 									}
 						});
 					}
