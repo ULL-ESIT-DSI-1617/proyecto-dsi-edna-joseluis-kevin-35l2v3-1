@@ -24,7 +24,6 @@ router.post('/', function(req, res) {
 			User.findOne({username:req.body.username}, function (err, result){
 					if(result !== null){
 							//Comprobamos que la contraseña es correcta
-							// let rs = bcrypt.compareSync(req.body.passwd, result.password)
 							if (result.username == req.body.username && bcrypt.compareSync(req.body.passwd, result.password)){
 								console.log('Login correcto!');
 								res.render('jscalculator');

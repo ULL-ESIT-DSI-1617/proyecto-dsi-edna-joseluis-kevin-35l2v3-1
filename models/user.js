@@ -13,10 +13,11 @@ mongoose.connect('mongodb://localhost/usuario', function(error){
 
 //Creamos el esquema de la Base de datos
 var Schema = mongoose.Schema({
-    // local: {
+    // local: { // <--- Comentar si no se utiliza passport
     username: String,
     password: String,
-//   },
+//   },// <--- Comentar si no se utiliza passport
+
 //   facebook: {
 //     id: String,
 //     token: String,
