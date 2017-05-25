@@ -11,7 +11,7 @@ var User = require('../models/user');
 
 
 router.get('/', function(req, res) {
-	res.render('signout');
+	res.render('register');
 });
 
 router.post('/', function(req, res) {

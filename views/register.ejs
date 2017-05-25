@@ -1,0 +1,70 @@
+		<% var title = 'Calculadora JSimple' %>
+        <% include head %>
+
+		<nav class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li><a href="/" id="index"><strong>Calculadora JSimple</strong></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		  
+		<div class="container-fluid text-center">    
+			<div class="row content">
+				<div class="col-sm-1 sidenav"></div>
+				<div class="col-sm-10 text-center">
+					<div class="row">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4 panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <h2>Regístrate</h2>
+                                </div>
+                                <form class="text-left" action="/register" method="post">
+                                    <div class="form-group">
+                                        <label for="username">Nombre de usuario</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Nombre de usuario" name="username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwd1">Contraseña</label>
+                                        <input type="password" class="form-control" id="passwd1" placeholder="Contraseña" name="passwd1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwd2">Repita la contraseña</label>
+                                        <input type="password" class="form-control" id="passwd2" placeholder="Contraseña" name="passwd2">
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" id="check" name="check"> Recordar usuario
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"aria-describedby="registerHelp" onclick="if (check.checked == true) storeUser();">Registrarse</button>
+                                    <p><small id="registerHelp" class="form-text text-muted"><a href="/login">(Inicia sesión si ya tienes una cuenta)</a></small></p>
+                                </form>
+                                <hr>
+                                <div class="row">
+                                    <h3>Accede con tus redes sociales</h3>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <a class="btn btn-block btn-social btn-facebook">
+                                        <span class="fa fa-facebook"></span> Inicia sesión con tu cuenta de Facebook
+                                    </a>
+                                    <a class="btn btn-block btn-social btn-github">
+                                        <span class="fa fa-github"></span> Inicia sesión con tu cuenta de GitHub
+                                    </a>
+                                </div>
+                            </div>
+						</div>
+						<div class="col-sm-4"></div>
+					</div>
+				</div>
+				<div class="col-sm-1 sidenav"></div>
+			</div>
+		</div>
+		<br>
+        <script src="js/remember.js"></script>
+
+		<% include foot %>

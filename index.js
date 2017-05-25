@@ -24,14 +24,17 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
-var signin = require('./routes/signin');
-app.use('/signin', signin);
+var login = require('./routes/login');
+app.use('/login', login);
 
-var signout = require('./routes/signout');
-app.use('/signout', signout);
+var register = require('./routes/register');
+app.use('/register', register);
 
 var jscalculator = require('./routes/jscalculator');
 app.use('/jscalculator', jscalculator);
+
+var histor = require('./routes/history');
+app.use('/history', histor);
 
 
 var server = app.listen(app.get('port'), function() {

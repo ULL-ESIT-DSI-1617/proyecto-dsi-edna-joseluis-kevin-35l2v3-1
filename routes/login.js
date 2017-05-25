@@ -10,7 +10,7 @@ mongoose.connect(configDB.url);
 var User = require('../models/user');
 
 router.get('/', function(req, res) {
-	res.render('signin');
+	res.render('login');
 });
 
 router.post('/', function(req, res) {
