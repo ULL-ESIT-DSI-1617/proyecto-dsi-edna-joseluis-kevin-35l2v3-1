@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
 
 var configDB = require('../config/database');
@@ -22,14 +23,11 @@ router.post('/', function(req, res) {
 	}else{
 			User.findOne({username:req.body.username}, function (err, result){
 					if(result !== null){
-
-							let rs = result.validPassword(req.body.passwd1,result.password);
-							console.log(ls);
-
-							if (result.username == req.body.username && rs == true){
-
-								// console.log('Login correcto!');
-								// res.render('jscalculator');
+							//Comprobamos que la contraseña es correcta
+							// let rs = bcrypt.compareSync(req.body.passwd, result.password)
+							if (result.username == req.body.username && bcrypt.compareSync(req.body.passwd, result.password)){
+								console.log('Login correcto!');
+								res.render('jscalculator');
 							}
 						}else{
 							User.findOne({username:req.body.username}, function (err, result){

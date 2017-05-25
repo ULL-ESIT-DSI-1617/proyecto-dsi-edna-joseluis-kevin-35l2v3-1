@@ -1,7 +1,6 @@
 "use strict";
 
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
 
 //Conexion a la base de datos
 mongoose.connect('mongodb://localhost/usuario', function(error){
@@ -26,14 +25,6 @@ var Schema = mongoose.Schema({
 //     username: String,
 //   },
 });
-
-Schema.methods.generateHash = function(password){
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
-}
-
-Schema.methods.validPassword = function(password){
-  return bcrypt.compareSync(password, this.password)
-}
 
 // Definimos el nombre de nuestro modelo y exportamos
 module.exports = mongoose.model('User', Schema);

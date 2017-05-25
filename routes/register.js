@@ -28,10 +28,11 @@ router.post('/', function(req, res) {
 			User.findOne({username:req.body.username}, function (err, result){
 				if(result == null){
 					//Poner el codigo para insertar usuario en la base de datos
-
+					
+					//Añadimos nuevo usuario y contraseña(cifrada)
 					var input = new User({
 						username: req.body.username,
-						password: bcrypt.hashSync(req.body.passwd1),
+						password: bcrypt.hashSync(req.body.passwd1, bcrypt.genSaltSync(10), null),
 					});
 
 					// Guardamos en la base de datos
