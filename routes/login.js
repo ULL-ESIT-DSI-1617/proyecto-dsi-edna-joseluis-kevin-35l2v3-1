@@ -25,7 +25,7 @@ router.post('/', function(req, res) {
 					if(result !== null){
 							//Comprobamos que la contraseña es correcta
 							if (result.username == req.body.username && bcrypt.compareSync(req.body.passwd, result.password)){
-								console.log('Login correcto!');
+								console.log('Login correcto! Hola ' + req.body.username);
 								res.render('jscalculator');
 							}
 						}else{

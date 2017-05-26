@@ -8,8 +8,8 @@ var express = require('express'),
 var mongoose = require('mongoose');
 
 //conectandonos a la base de datos
-var configDB = require('./config/database.js');
-mongoose.connect(configDB.url);
+// var configDB = require('./config/databaseU.js');
+// mongoose.connect(configDB.url);
 
 app.set('port', (process.env.PORT || 8080));
 
