@@ -17,6 +17,10 @@ var Schema = mongoose.Schema({
     // local: { // <--- Comentar si no se utiliza passport
     username: String,
     password: String,
+	histor: [{
+		operation: String, 
+		date: { type: Date, default: Date.now}
+	}]
 //   },// <--- Comentar si no se utiliza passport
 
 //   facebook: {

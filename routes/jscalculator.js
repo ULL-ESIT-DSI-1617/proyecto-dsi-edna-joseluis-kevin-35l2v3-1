@@ -13,22 +13,21 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-	console.log("Operación realizada: " + req.body.original + " = " + req.body.result);
+	var oper = req.body.original + " = " + req.body.result;
+	console.log("Operación realizada: " + oper);
 	
 	// Guardar operación en el historial si es válida...
-		var input = new Result({
-			result: req.body.result,
-		});
-
-		// Guardamos en la base de datos
-		input.save(function(err){
-			if(err){
-				console.log('ERROR');
-			}else{
-				console.log(input);
-			}
-		});
-		console.log("Resultado guardado correctamente");
+	
+	// var aux = { operation: oper };
+	// db.User.findOneAndUpdate(
+		// {username: nombreDelUsuario},
+		// {$push: {historical: aux}},
+		// function(err, model) {
+			// if (err){
+				// console.log(err);
+			// }
+		// }
+	// );
 });
 
 module.exports = router;
