@@ -4,12 +4,7 @@ var express = require('express'),
 	app = express(),
 	bodyParser = require('body-parser'),
 	path = require('path');
-
-var mongoose = require('mongoose');
-
-//conectandonos a la base de datos
-// var configDB = require('./config/databaseU.js');
-// mongoose.connect(configDB.url);
+require('./models');
 
 app.set('port', (process.env.PORT || 8080));
 
