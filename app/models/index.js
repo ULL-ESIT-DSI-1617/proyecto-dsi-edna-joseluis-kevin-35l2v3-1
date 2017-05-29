@@ -1,6 +1,6 @@
 if (!global.hasOwnProperty('db')) {
 	var mongoose = require('mongoose');
-	var dbUrl = require('../config/database').url;
+	var dbUrl = require('../../config/database').url;
 	
 	mongoose.connect(dbUrl, (err)=> {
 		if (err) {

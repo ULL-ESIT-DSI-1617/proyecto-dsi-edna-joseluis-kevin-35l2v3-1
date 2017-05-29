@@ -9,7 +9,7 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	session = require('express-session');
 	
-require('./models');
+require('./app/models');
 require('./config/passport')(passport);
 
 app.set('port', (process.env.PORT || 8080));
@@ -29,7 +29,7 @@ app.use(passport.session());
 app.use(flash());
 
 
-var routes = require('./routes/routes')(passport);
+var routes = require('./app/routes')(passport);
 app.use('/', routes);
 
 
