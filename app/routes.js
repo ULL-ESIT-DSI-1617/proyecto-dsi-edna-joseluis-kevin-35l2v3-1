@@ -20,6 +20,26 @@ module.exports = function(passport) {
 	}));
 	
 	
+	router.get('/auth/facebook', notLoggedIn, passport.authenticate('facebook', {
+		scope: ['email']
+	}));
+	
+	router.get('/auth/facebook/callback', notLoggedIn, passport.authenticate('facebook', {
+		successRedirect: '/jscalculator',
+		failureRedirect: '/login'
+	}));
+	
+	
+	router.get('/auth/github', notLoggedIn, passport.authenticate('github', {
+		scope: ['email']
+	}));
+	
+	router.get('/auth/github/callback', notLoggedIn, passport.authenticate('github', {
+		successRedirect: '/jscalculator',
+		failureRedirect: '/login'
+	}));
+	
+	
 	router.get('/register', notLoggedIn, function(req, res) {
 		res.render('register', { message: req.flash('registerMessage') });
 	});
@@ -38,11 +58,13 @@ module.exports = function(passport) {
 	router.post('/jscalculator', isLoggedIn, function(req, res) {
 		var oper = req.body.original + " = " + req.body.result;
 		console.log("Operación realizada: " + oper);
+		console.log(req.user.local.username);
+		console.log(req.user._id);
 		
 		if (!oper.match(/ERROR/)) {
 			var aux = { operation: oper };
 			db.User.findOneAndUpdate(
-				{'local.username': req.user.local.username},
+				{'_id': req.user._id},
 				{$push: {'histor': aux}},
 				function(err, model) {
 					if (err){

@@ -2,19 +2,24 @@ var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(mongoose) {	
 	var UserSchema = new mongoose.Schema({
-		local: { // <--- Comentar si no se utiliza passport
+		local: {
 			username: String,
 			passwd: String
-		},// <--- Comentar si no se utiliza passport
+		},
 		
-		// facebook: {
-			// id: String,
-			// token: String,
-			// email: String,
-			// name: String,
-			// username: String,
-		// }
+		facebook: {
+			id: String,
+			token: String,
+			email: String,
+			name: String,
+		},
 		
+		github: {
+			id: String,
+			token: String,
+			email: String,
+			displayName: String,
+		},
 		
 		histor: [{
 			operation: String, 

@@ -1,7 +1,10 @@
 "use strict";
 
 var LocalStrategy = require('passport-local').Strategy;
-// var FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var GitHubStrategy = require('passport-github2').Strategy;
+
+var configAuth = require('./auth');
 
 module.exports = function(passport){
 
@@ -61,6 +64,82 @@ module.exports = function(passport){
 						newUser.local.username = username;
 						newUser.local.passwd = newUser.generateHash(passwd);
 					
+						newUser.save(function(err) {
+							if (err) {
+								throw err;
+							}
+							return done(null, newUser);
+						});
+					}
+				});
+			});
+		}
+	));
+	
+	
+	// Estrategia Facebook
+	
+	passport.use(new FacebookStrategy({
+			clientID: configAuth.facebookAuth.clientID,
+			clientSecret: configAuth.facebookAuth.clientSecret,
+			callbackURL: configAuth.facebookAuth.callbackURL,
+			profileFields: ['id', 'emails', 'name']
+		},
+		function(token, refreshToken, profile, done) {
+			process.nextTick(function() {
+				console.log(profile);
+				db.User.findOne({ 'facebook.id': profile.id }, function(err, user) {
+					if (err) {
+						return done(err);
+					}
+					if (user) {
+						return done(null, user);
+					}
+					else {
+						var newUser = new db.User();
+						newUser.facebook.id = profile.id;
+						newUser.facebook.token = token;
+						newUser.facebook.email = profile.emails[0].value || '';
+						newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+						
+						newUser.save(function(err) {
+							if (err) {
+								throw err;
+							}
+							return done(null, newUser);
+						});
+					}
+				});
+			});
+		}
+	));
+	
+	
+	// Estrategia GitHub
+	
+	passport.use(new GitHubStrategy({
+			clientID: configAuth.githubAuth.clientID,
+			clientSecret: configAuth.githubAuth.clientSecret,
+			callbackURL: configAuth.githubAuth.callbackURL,
+			profileFields: ['id', 'email', 'name']
+		},
+		function(token, refreshToken, profile, done) {
+			process.nextTick(function() {
+				console.log(profile);
+				db.User.findOne({ 'github.id': profile.id }, function(err, user) {
+					if (err) {
+						return done(err);
+					}
+					if (user) {
+						return done(null, user);
+					}
+					else {
+						var newUser = new db.User();
+						newUser.github.id = profile.id;
+						newUser.github.token = token;
+						newUser.github.email = profile.emails[0].value || '';
+						newUser.github.displayName = profile.displayName || '';
+						
 						newUser.save(function(err) {
 							if (err) {
 								throw err;
