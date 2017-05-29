@@ -22,6 +22,9 @@
                                 <div class="row">
                                     <h2>Inicia sesión</h2>
                                 </div>
+                                <% if (message.length > 0) { %>
+                                    <div class="alert alert-danger"><%= message %></div>
+                                <% } %>
                                 <form class="text-left" action="/login" method="post">
                                     <div class="form-group">
                                         <label for="username">Nombre de usuario</label>
@@ -37,7 +40,7 @@
                                         </label>
                                     </div>
                                     <button type="submit" class="btn btn-primary" aria-describedby="loginHelp" onclick="if (check.checked == true) storeUser();">Iniciar sesión</button>
-                                    <p><small id="loginHelp" class="form-text text-muted"><a href="/register">(Regístrate si aún no tienes una cuenta)</a></small></p>
+                                    <p><small id="loginHelp" class="form-text text-muted">¿Aún no tienes cuenta?<a href="/register"> Regístrate</a></small></p>
                                 </form>
                                 <form class="text-left">
                                     <button type="submit" class="btn btn-danger text-left" onclick="clearLocalStorage();">Eliminar almacenamiento local</button>

@@ -1,15 +1,11 @@
-module.exports = function(mongoose) {
-	var Schema = mongoose.Schema;
-	
-	var UserSchema = new Schema({
-		// local: { // <--- Comentar si no se utiliza passport
+var bcrypt = require('bcrypt-nodejs');
+
+module.exports = function(mongoose) {	
+	var UserSchema = new mongoose.Schema({
+		local: { // <--- Comentar si no se utiliza passport
 			username: String,
-			passwd: String,
-			histor: [{
-				operation: String, 
-				date: { type: Date, default: Date.now}
-			}]
-		// },// <--- Comentar si no se utiliza passport
+			passwd: String
+		},// <--- Comentar si no se utiliza passport
 		
 		// facebook: {
 			// id: String,
@@ -18,16 +14,22 @@ module.exports = function(mongoose) {
 			// name: String,
 			// username: String,
 		// }
+		
+		
+		histor: [{
+			operation: String, 
+			date: { type: Date, default: Date.now}
+		}]
 	});
 	
-	return mongoose.model('User', UserSchema);
-}
+	UserSchema.methods.generateHash = function(passwd){		
+		return bcrypt.hashSync(passwd, bcrypt.genSaltSync(10), null)		
+	}		
 
-// Schema.methods.generateHash = function(password){		
-//    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)		
-//  }		
- 		
-//  Schema.methods.validPassword = function(password){		
-//    return bcrypt.compareSync(password, this.password)		
-//  }
-// Definimos el nombre de nuestro modelo y exportamos
+	UserSchema.methods.validPassword = function(passwd){		
+		return bcrypt.compareSync(passwd, this.local.passwd)
+	}
+	
+	
+	return mongoose.model('User', UserSchema);
+};

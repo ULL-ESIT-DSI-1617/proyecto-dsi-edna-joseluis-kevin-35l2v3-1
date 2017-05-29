@@ -22,6 +22,9 @@
                                 <div class="row">
                                     <h2>Regístrate</h2>
                                 </div>
+                                <% if (message.length > 0) { %>
+                                    <div class="alert alert-danger"><%= message %></div>
+                                <% } %>
                                 <form class="text-left" action="/register" method="post">
                                     <div class="form-group">
                                         <label for="username">Nombre de usuario</label>
@@ -29,19 +32,21 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="passwd1">Contraseña</label>
-                                        <input type="password" class="form-control" id="passwd1" placeholder="Contraseña" name="passwd1">
+                                        <input type="password" class="form-control" id="passwd" placeholder="Contraseña" name="passwd">
                                     </div>
+<!--
                                     <div class="form-group">
                                         <label for="passwd2">Repita la contraseña</label>
                                         <input type="password" class="form-control" id="passwd2" placeholder="Contraseña" name="passwd2">
                                     </div>
+-->
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <input type="checkbox" class="form-check-input" id="check" name="check"> Recordar usuario
                                         </label>
                                     </div>
                                     <button type="submit" class="btn btn-primary"aria-describedby="registerHelp" onclick="if (check.checked == true) storeUser();">Registrarse</button>
-                                    <p><small id="registerHelp" class="form-text text-muted"><a href="/login">(Inicia sesión si ya tienes una cuenta)</a></small></p>
+                                    <p><small id="registerHelp" class="form-text text-muted">¿Ya tienes una cuenta?<a href="/login"> Inicia sesión</a></small></p>
                                 </form>
                                 <hr>
                                 <div class="row">
