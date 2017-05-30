@@ -5,7 +5,7 @@ var router = express.Router();
 
 module.exports = function(passport) {
 	router.get('/', function(req, res) {
-		res.render('index');
+		res.render('index', { user: req.user });
 	});
 	
 	
@@ -64,10 +64,14 @@ module.exports = function(passport) {
 		if (!oper.match(/ERROR/)) {
 			var aux = { operation: oper };
 			db.User.findOneAndUpdate(
-				{'_id': req.user._id},
-				{$push: {'histor': aux}},
+				{
+					'_id': req.user._id
+				},
+				{
+					$push: {'histor': aux}
+				},
 				function(err, model) {
-					if (err){
+					if (err) {
 						console.log(err);
 					}
 				}
@@ -77,7 +81,42 @@ module.exports = function(passport) {
 	
 
 	router.get('/history', isLoggedIn, function(req, res) {
-		res.render('history');
+		db.User.findOne(
+			{
+				'_id': req.user._id
+			},
+			'histor',
+			{
+				sort: 'histor.date'
+			},
+			function (err, model) {
+				if (err) {
+					console.log(err);
+				}
+				else {
+					res.render('history', { histor: model.histor });
+				}
+			}
+		)
+	});
+	
+	router.get('/history/delete', isLoggedIn, function(req, res) {
+		db.User.findOneAndUpdate(
+			{
+				'_id': req.user._id
+			},
+			{
+				histor: []
+			},
+			function (err, model) {
+				if (err) {
+					console.log(err);
+				}
+				else {
+					res.redirect('/jscalculator');
+				}
+			}
+		)
 	});
 	
 	

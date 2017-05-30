@@ -11,8 +11,12 @@
 						<li><a href="#operaciones">Operaciones</a></li>
 						<li><a href="#acercade">Sobre el proyecto</a></li>
 						<li><a href="#footer">Contacto</a></li>
-						<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
-					</ul>
+                        <% if (!user) { %>
+                            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a></li>
+                        <% } else { %>
+                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
+                        <% } %>
+                    </ul>
 				</div>
 			</div>
 		</nav>
