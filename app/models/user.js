@@ -1,5 +1,7 @@
 var bcrypt = require('bcrypt-nodejs');
 
+
+// Schema de nuestra base de datos
 module.exports = function(mongoose) {	
 	var UserSchema = new mongoose.Schema({
 		local: {
@@ -27,10 +29,11 @@ module.exports = function(mongoose) {
 		}]
 	});
 	
+	// Encriptamos	
 	UserSchema.methods.generateHash = function(passwd){		
 		return bcrypt.hashSync(passwd, bcrypt.genSaltSync(10), null)		
 	}		
-
+	// Comprobamos contraseña encriptada
 	UserSchema.methods.validPassword = function(passwd){		
 		return bcrypt.compareSync(passwd, this.local.passwd)
 	}

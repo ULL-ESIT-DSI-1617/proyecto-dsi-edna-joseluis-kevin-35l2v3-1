@@ -2,6 +2,7 @@ if (!global.hasOwnProperty('db')) {
 	var mongoose = require('mongoose');
 	var dbUrl = require('../../config/database').url;
 	
+	// Realizamos la conexion
 	mongoose.connect(dbUrl, (err)=> {
 		if (err) {
 			console.log("Error: Check if mongod is running!!");
