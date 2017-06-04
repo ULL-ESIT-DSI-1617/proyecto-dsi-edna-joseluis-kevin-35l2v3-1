@@ -13,12 +13,15 @@ module.exports = function(passport) {
 		res.render('login', { message: req.flash('loginMessage') });
 	});
 	
+	// Autenticación local
+
 	router.post('/login', notLoggedIn, passport.authenticate('local-login', {
 		successRedirect: '/jscalculator',
 		failureRedirect: '/login',
-		failureFlash: true
+		failureFlash: true,
 	}));
 	
+	// Autenticación Facebook
 	
 	router.get('/auth/facebook', notLoggedIn, passport.authenticate('facebook', {
 		scope: ['email']
@@ -29,6 +32,7 @@ module.exports = function(passport) {
 		failureRedirect: '/login'
 	}));
 	
+	// Autenticación Github
 	
 	router.get('/auth/github', notLoggedIn, passport.authenticate('github', {
 		scope: ['email']
@@ -47,7 +51,7 @@ module.exports = function(passport) {
 	router.post('/register', notLoggedIn, passport.authenticate('local-register', {
 		successRedirect: '/jscalculator',
 		failureRedirect: '/register',
-		failureFlash: true
+		failureFlash: true,
 	}));
 	
 	
@@ -55,12 +59,14 @@ module.exports = function(passport) {
 		res.render('jscalculator');
 	});
 	
-	router.post('/jscalculator', isLoggedIn, function(req, res) {
+	router.post('/jscalculator', isLoggedIn, function(req,res) {
 		var oper = req.body.original + " = " + req.body.result;
 		console.log("Operación realizada: " + oper);
 		console.log(req.user.local.username);
 		console.log(req.user._id);
 		
+		// Actualizamos el historial del usuario añadiendo la nueva operacion
+
 		if (!oper.match(/ERROR/)) {
 			var aux = { operation: oper };
 			db.User.findOneAndUpdate(
@@ -79,6 +85,7 @@ module.exports = function(passport) {
 		}
 	});
 	
+	//Historial del usuario
 
 	router.get('/history', isLoggedIn, function(req, res) {
 		db.User.findOne(
@@ -99,6 +106,8 @@ module.exports = function(passport) {
 			}
 		)
 	});
+
+	// Borrando historial
 	
 	router.get('/history/delete', isLoggedIn, function(req, res) {
 		db.User.findOneAndUpdate(
