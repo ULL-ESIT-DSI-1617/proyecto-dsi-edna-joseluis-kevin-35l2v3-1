@@ -64,6 +64,7 @@ module.exports = function(passport) {
 		console.log("Operación realizada: " + oper);
 		console.log(req.user.local.username);
 		console.log(req.user._id);
+		var rValue = req.body.result;
 		
 		// Actualizamos el historial del usuario añadiendo la nueva operacion
 
@@ -79,10 +80,15 @@ module.exports = function(passport) {
 				function(err, model) {
 					if (err) {
 						console.log(err);
+					}else{
+						res.render('jscalculator', {resultado: rValue});
+					
 					}
 				}
 			);
 		}
+		
+		
 	});
 	
 	//Historial del usuario
