@@ -19,7 +19,7 @@ module.exports = function(passport){
     });
 	
 	
-	// Estrtegia local para el inicio de sesión
+	// Estrategia local para el inicio de sesión
 
     passport.use('local-login', new LocalStrategy({
 			usernameField: 'username',

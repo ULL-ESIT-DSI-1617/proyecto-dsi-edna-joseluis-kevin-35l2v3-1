@@ -1,4 +1,6 @@
         <% var title = 'Calculadora JSimple' %>
+        <% var operacion %>
+        <% var resultado %>
         <% include head %>
 
 		<nav class="navbar navbar-fixed-top">
@@ -31,11 +33,13 @@
                                     <input type="text" class="form-control text-center" id="original" name="original" placeholder="2+3" autofocus>
                                     <br>
                                     <button type="submit" class="btn btn-primary" onclick="main();">Resolver</button>
-                                    <label for="operated">Resultado:</label>
-                                    <span class="output text-center" id="operated" name="operated"></span>
+                                    <br>
+                                    <br>
+                                    <label for="operated">Resultado <%- operacion %> =</label>
+                                    <span class="output text-center" id="operated" name="operated">
+                                        <%- resultado %>
+                                    </span>
                                     <input type="hidden" id="result" name="result">
-                                    <% var resultado %>
-                                    <%- resultado %>
                                 </div>
                                 <div class="col-sm-3"></div>
                             </form>

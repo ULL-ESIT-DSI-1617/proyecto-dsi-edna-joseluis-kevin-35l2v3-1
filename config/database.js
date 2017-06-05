@@ -1,5 +1,5 @@
 module.exports = {
-  url: 'mongodb://localhost/calculadora',
+	url: 'mongodb://localhost/calculadora',
 };
 
 

@@ -29,11 +29,11 @@ module.exports = function(mongoose) {
 		}]
 	});
 	
-	// Encriptamos	
+	// Se encripta la contraseña	
 	UserSchema.methods.generateHash = function(passwd){		
 		return bcrypt.hashSync(passwd, bcrypt.genSaltSync(10), null)		
 	}		
-	// Comprobamos contraseña encriptada
+	// Se comprueba que la contraseña encriptada coincide con la guardada
 	UserSchema.methods.validPassword = function(passwd){		
 		return bcrypt.compareSync(passwd, this.local.passwd)
 	}

@@ -2,14 +2,15 @@
 
 var express = require('express'),
 	app = express(),
-	mongoose = require('mongoose'),
 	passport = require('passport'),
 	flash = require('connect-flash'),
 	cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser'),
 	session = require('express-session');
-	
+
+// Conexión con la base de datos
 require('./app/models');
+// Configuración de passport
 require('./config/passport')(passport);
 
 app.set('port', (process.env.PORT || 8080));

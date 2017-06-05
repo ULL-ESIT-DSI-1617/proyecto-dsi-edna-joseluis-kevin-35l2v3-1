@@ -4,16 +4,19 @@ var express = require('express');
 var router = express.Router();
 
 module.exports = function(passport) {
+	
+	// Inicio
+	
 	router.get('/', function(req, res) {
 		res.render('index', { user: req.user });
 	});
 	
 	
+	// Autenticación local
+	
 	router.get('/login', notLoggedIn, function(req, res) {
 		res.render('login', { message: req.flash('loginMessage') });
 	});
-	
-	// Autenticación local
 
 	router.post('/login', notLoggedIn, passport.authenticate('local-login', {
 		successRedirect: '/jscalculator',
@@ -44,6 +47,8 @@ module.exports = function(passport) {
 	}));
 	
 	
+	// Registro local
+	
 	router.get('/register', notLoggedIn, function(req, res) {
 		res.render('register', { message: req.flash('registerMessage') });
 	});
@@ -55,21 +60,23 @@ module.exports = function(passport) {
 	}));
 	
 	
+	// Calculadora
+	
 	router.get('/jscalculator', isLoggedIn, function(req, res) {
 		res.render('jscalculator');
 	});
 	
 	router.post('/jscalculator', isLoggedIn, function(req,res) {
-		var oper = req.body.original + " = " + req.body.result;
-		console.log("Operación realizada: " + oper);
-		console.log(req.user.local.username);
-		console.log(req.user._id);
+		var rOperation = req.body.original;
 		var rValue = req.body.result;
+		var oper = rOperation + " = " + rValue;
+		console.log("_id: " + req.user._id);
+		console.log("Operación realizada: " + oper);
 		
-		// Actualizamos el historial del usuario añadiendo la nueva operacion
-
+		// Si la operación introducida es correcta...
 		if (!oper.match(/ERROR/)) {
 			var aux = { operation: oper };
+			// Se busca el usuario por su _id y se añade la nueva operación
 			db.User.findOneAndUpdate(
 				{
 					'_id': req.user._id
@@ -81,19 +88,19 @@ module.exports = function(passport) {
 					if (err) {
 						console.log(err);
 					}else{
-						res.render('jscalculator', {resultado: rValue});
-					
+						console.log("Operación guardada");
 					}
 				}
 			);
 		}
 		
-		
+		res.render('jscalculator', {operacion: rOperation, resultado: rValue});
 	});
 	
 	//Historial del usuario
 
 	router.get('/history', isLoggedIn, function(req, res) {
+		// Se busca el historial del usuario por su _id y se muestra
 		db.User.findOne(
 			{
 				'_id': req.user._id
@@ -112,10 +119,12 @@ module.exports = function(passport) {
 			}
 		)
 	});
+	
 
-	// Borrando historial
+	// Borrar historial
 	
 	router.get('/history/delete', isLoggedIn, function(req, res) {
+		// Se busca el historial del usuario por su _id y se vacía
 		db.User.findOneAndUpdate(
 			{
 				'_id': req.user._id
@@ -135,6 +144,8 @@ module.exports = function(passport) {
 	});
 	
 	
+	// Cierre de sesión
+	
 	router.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
@@ -144,6 +155,8 @@ module.exports = function(passport) {
 	return router;
 };
 
+// Middleware que comprueba que el usuario está autenticado
+
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
@@ -151,6 +164,8 @@ function isLoggedIn(req, res, next) {
 	
 	res.redirect('/login');
 }
+
+// Middleware que comprueba que el usuario NO está autenticado
 
 function notLoggedIn(req, res, next) {
 	if (!req.isAuthenticated()) {

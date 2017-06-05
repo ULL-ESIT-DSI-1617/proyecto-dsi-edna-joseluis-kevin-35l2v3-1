@@ -2,7 +2,7 @@ if (!global.hasOwnProperty('db')) {
 	var mongoose = require('mongoose');
 	var dbUrl = require('../../config/database').url;
 	
-	// Realizamos la conexion
+	// Conexión con la base de datos
 	mongoose.connect(dbUrl, (err)=> {
 		if (err) {
 			console.log("Error: Check if mongod is running!!");
@@ -16,6 +16,7 @@ if (!global.hasOwnProperty('db')) {
 	global.db = {
 		mongoose: mongoose,
 		
+		// Modelo de la colección
 		User: require('./user')(mongoose)
 	};
 }
